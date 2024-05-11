@@ -120,9 +120,16 @@ const Container = styled.div`
       outline-style:none;
       margin-right:4px;
       margin-left:4px;
+      padding:10px 15px;
       
       
   }
+  @media only screen and (max-width: 530px) {
+   
+   input{
+       width:60vw;
+   }
+}
 
 
 `;

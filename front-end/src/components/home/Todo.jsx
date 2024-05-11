@@ -224,6 +224,7 @@ function Index() {
 
 export default Index;
 const ParentContainer = styled.div`
+  
   .auth-root-container {
     display: flex;
     justify-content: flex-end;
@@ -241,6 +242,7 @@ const ParentContainer = styled.div`
       font-weight: bold;
     }
   }
+ 
 `;
 const Container = styled.div`
   display: grid;
@@ -252,6 +254,7 @@ const Container = styled.div`
     width: 35%;
     padding: 10px;
     border-radius: 5px;
+    
   }
   .buttons-container {
     width: 120px;
@@ -277,5 +280,11 @@ const Container = styled.div`
       width: 280px;
     }
   }
+  @media only screen and (max-width: 530px) {
+   
+    .tasks-container{
+      width:90vw;
+    }
+}
 `;
 const EditForm = styled.div``;
