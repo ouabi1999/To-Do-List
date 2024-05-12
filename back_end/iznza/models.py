@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from uuid import uuid4
 
 def get_uuid():
-    return uuid4().hex
+    return uuid4()
 
 # Create your models here.
 class UserAccountManager(BaseUserManager):
@@ -34,7 +34,7 @@ class UserAccountManager(BaseUserManager):
         return user
     
 class Users(AbstractBaseUser, PermissionsMixin):
-    id = models.CharField(unique=True, primary_key=True, max_length=25, default=get_uuid )
+    id = models.CharField(unique=True, primary_key=True, max_length=250, default=get_uuid )
     fullName = models.CharField(max_length=120)
     email = models.EmailField(unique = True, max_length=240)
     password = models.CharField(max_length=240)
@@ -48,7 +48,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     
     
 class Task(models.Model):
-    id = models.CharField(unique=True, primary_key=True, max_length=25, default=get_uuid)
+    id = models.CharField(unique=True, primary_key=True, default=get_uuid)
     task = models.CharField(max_length=200)
     isChecked = models.BooleanField(default=False)
     user = models.ForeignKey(Users, on_delete=models.PROTECT, blank=False)
