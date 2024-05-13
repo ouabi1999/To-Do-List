@@ -161,7 +161,7 @@ STATICFILES_DIRS = [
 # Configuration for production
 if not DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles`
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'front-end/dist')
     # Enable the WhiteNoise storage backend for production
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
