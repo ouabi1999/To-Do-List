@@ -13,6 +13,7 @@ import {
 import SignUp from "./components/authantication/SignUp"
 import Login from "./components/authantication/Login"
 import { setAuth } from './state/features/authentication';
+import apiInstance from './common/baseUrl';
 import { useDispatch } from 'react-redux';
 function App() {
   const [user, setUser] = useState("")
@@ -21,11 +22,7 @@ function App() {
 
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/profile/', {
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem('access_token')}`, // Retrieve token from storage
-          },
-        });
+        const response = await apiInstance.get("profile/");
         setUser(response.data);
         console.log(response.data)
         dispatch(setAuth(response.data))

@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4&+flz2$ice!9x!89wjq0(m%(x8wil&ozjjw1%rq+6!n(+2)@k'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -75,9 +77,13 @@ SIMPLE_JWT = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-     'http://127.0.0.1:5173'
+     'http://127.0.0.1:5173',
+     "http://localhost:5173"
      
 ]
+
+CSRF_TRUSTED_ORIGINS = os.getenv.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
+
 ROOT_URLCONF = 'api.urls'
 
 
@@ -107,7 +113,7 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default="postgres://samad:cr0qoZMkbBA3YC8u5xVBD0nvC9TJRyTQ@dpg-covkk2o21fec73fmaj50-a.oregon-postgres.render.com/todolistdb_nfnk",
+        default= os.getenv("DATABASE_URL"),
         conn_max_age=600
     )
 }

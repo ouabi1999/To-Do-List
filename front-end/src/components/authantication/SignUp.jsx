@@ -33,8 +33,8 @@ function SignUp() {
 
   const handleSubmit = (values) => {
     setIsLoading(true);
-    axios
-      .post("http://127.0.0.1:8000/api/register/", {
+    apiInstance
+      .post("register/", {
         password: values.password,
         fullName: values.fullName,
         email: values.email,

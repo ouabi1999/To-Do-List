@@ -13,6 +13,7 @@ import { setUserTasks } from "../../state/features/userTasks";
 import AddTaskForm from "./Todo/AddTaskForm";
 import UpdateTaskForm from "./Todo/UpdateTaskForm";
 import { setLogout } from "../../state/features/authentication";
+import apiInstance from "../../common/baseUrl";
 function Index() {
   const user = useSelector((state) => state.auth?.user);
   const tasks = useSelector((state) => state.userTasks?.tasks);
@@ -39,8 +40,8 @@ function Index() {
   const DeleteTask = (id) => {
     setTakeActionLoading((prev) => ({ ...prev, loading: true, id: id }));
 
-    axios
-      .delete(`http://127.0.0.1:8000/api/task-detail-view/${id}/`)
+    apiInstance
+      .delete(`task-detail-view/${id}/`)
       .then(function (response) {
         dispatch(setUserTasks(response.data));
 
@@ -67,9 +68,9 @@ function Index() {
 
   useEffect(() => {
     if (valueToUpdate) {
-      axios
+      apiInstance
         .put(
-          `http://127.0.0.1:8000/api/task-detail-view/${valueToUpdate.id}/`,
+          `task-detail-view/${valueToUpdate.id}/`,
           valueToUpdate
         )
         .then((response) => {
@@ -101,8 +102,8 @@ function Index() {
         ...prev,
         user: user.id,
       }));
-      axios
-        .get(`http://127.0.0.1:8000/api/get-user-tasks/${user.id}/`)
+      apiInstance
+        .get(`get-user-tasks/${user.id}/`)
         .then((response) => {
           dispatch(setUserTasks(response.data));
           setIsLoading(false);
@@ -120,9 +121,9 @@ function Index() {
   }, [user]);
 
   const logout = () => {
-    axios
+    apiInstance
       .post(
-        "http://127.0.0.1:8000/api/logout/",
+        "logout/",
         { refresh_token: refresh_token },
         {
           headers: {

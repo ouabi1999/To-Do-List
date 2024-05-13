@@ -19,6 +19,7 @@ import { setLogin } from "../../state/features/authentication";
 import axios from "axios";
 import { useFormik , ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import apiInstance from "../../common/baseUrl";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,8 +34,8 @@ function Login() {
   
   const handleSubmit = (values) => {
     setIsLoading(true);
-    axios
-      .post("http://127.0.0.1:8000/api/login/", values)
+    apiInstance
+      .post("login/", values)
       .then((response) => {
         dispatch(setLogin(response.data));
         setIsLoading(false);
