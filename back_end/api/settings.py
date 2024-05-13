@@ -151,7 +151,7 @@ USE_TZ = True
 
 
 # Define STATIC_ROOT for collecting static files in development
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'statc'
 
 # Define STATICFILES_DIRS for additional static files in development
 STATICFILES_DIRS = [
