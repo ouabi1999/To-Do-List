@@ -82,7 +82,6 @@ CORS_ORIGIN_WHITELIST = [
      
 ]
 
-CSRF_TRUSTED_ORIGINS = os.getenv.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
 
 ROOT_URLCONF = 'api.urls'
 
