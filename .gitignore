@@ -25,3 +25,10 @@ venv
 *.njsproj
 *.sln
 *.sw?
+# Ignore frontend build files
+
+# Ignore staticfiles collected during production
+/staticfiles/
+
+# Ignore local configuration
+local_settings.py
