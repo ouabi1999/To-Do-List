@@ -4,13 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUserTask } from '../../../state/features/userTasks';
 import styled from 'styled-components';
 import apiInstance from '../../../common/baseUrl';
+import { Button, LinearProgress } from '@mui/material';
 function AddTaskForm({user}) {
     const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState(false)
     const [task, setTask] = useState({
         task: "",
         isChecked: false,
         user: user?.id,
       });
+
     const isLoged = useSelector(state => state.auth.isLoged)
     const [checkIsLogedIn , setCheckIsLogedIn] = useState(true)
 
@@ -26,28 +29,28 @@ function AddTaskForm({user}) {
     setCheckIsLogedIn(true)
   }
   const addTask = () => {
-    
-   if (isLoged != false ){
+    if (isLoged != false) {
+      if (task.task != "") {
+        setIsLoading(true)
+        apiInstance
+          .post("task-view/", task)
+          .then(function (response) {
+            dispatch(addUserTask(response.data));
+            setIsLoading(false)
+            setTask((prev) => ({ ...prev, isChecked: false, task: "" }));
+          })
+          .catch(function (error) {
+            console.log(error);
+            setIsLoading(true)
 
-      if (task.task != ""){
-
-     
-    apiInstance
-      .post("task-view/", task)
-      .then(function (response) {
-        dispatch(addUserTask(response.data));
-        setTask((prev) => ({ ...prev, isChecked: false, task: "" }));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }else{
-      setCheckIsLogedIn(null)
+          });
+      } else {
+        setCheckIsLogedIn(null);
+      }
+    } else {
+      setCheckIsLogedIn(false);
     }
-    }else{
-      setCheckIsLogedIn(false)
   }
-}
   useEffect(() => {
     setTask(prev => ({
      ...prev,
@@ -77,9 +80,30 @@ function AddTaskForm({user}) {
           )}
         </div>
         <div>
-        <button type="button" onClick={addTask}>
-          Add{" "}
-        </button>
+       
+        <Button 
+              type="button" 
+              onClick={addTask} 
+              disabled ={isLoading} 
+              variant="contained"
+              sx={{
+                "&.Mui-disabled": {
+                  backgroundColor:"#eb0acd71",
+                }
+              }}
+              
+              
+              >
+         <div>
+        <span>
+            Add{" "}
+        </span>
+        {isLoading &&(
+        <LinearProgress color="primary"  />
+        )}
+        
+        </div>
+      </Button>
         </div>
       </Container>
     </PrentContainer>
@@ -120,7 +144,6 @@ const Container = styled.div`
       outline-style:none;
       margin-right:4px;
       margin-left:4px;
-      padding:10px 15px;
       
       
   }
