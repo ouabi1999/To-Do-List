@@ -21,10 +21,10 @@ function App() {
   useEffect(() => {
 
     const fetchProfile = async () => {
+
       try {
         const response = await apiInstance.get("profile/");
         setUser(response.data);
-        console.log(response.data)
         dispatch(setAuth(response.data))
       } catch (error) {
         console.error('Profile fetch error:', error);

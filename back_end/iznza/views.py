@@ -35,12 +35,9 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
 
 
-def index(request):
-    return render(request, 'index.html')
- 
+
 class UsersView(generics.ListAPIView):
     serializer_class = UserSerializer
     queryset = Users.objects.all()

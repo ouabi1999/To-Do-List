@@ -63,7 +63,6 @@ function Index() {
   const OpenTaskEditForm = (value) => {
     setTask(value);
     setIsOpen(true);
-    console.log(task);
   };
 
   useEffect(() => {
@@ -94,7 +93,6 @@ function Index() {
   }, [valueToUpdate]);
 
   const getUserTasks = () => {
-    console.log(user);
     if (user != null) {
       setIsLoading(true);
 
@@ -117,7 +115,6 @@ function Index() {
 
   useEffect(() => {
     getUserTasks();
-    console.log("refresh", refresh_token);
   }, [user]);
 
   const logout = () => {
@@ -125,11 +122,7 @@ function Index() {
       .post(
         "logout/",
         { refresh_token: refresh_token },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
+        
       )
       .then((response) => {
         dispatch(setLogout());

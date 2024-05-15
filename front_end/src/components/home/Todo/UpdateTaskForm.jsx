@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch, useSelector } from "react-redux";
 import { setUserTasks } from '../../../state/features/userTasks';
 import styled from 'styled-components';
+import apiInstance from '../../../common/baseUrl';
 function UpdateTaskForm({user , update_task, tasks, setIsOpen}) {
     const dispatch = useDispatch()
     const [task, setTask] = useState(update_task);
@@ -24,8 +25,8 @@ function UpdateTaskForm({user , update_task, tasks, setIsOpen}) {
         const abortControler = new AbortController();
         const signal = abortControler.signal;
         setTakeActionLoading((prev) => ({ ...prev, loading: true, id: update_task.id }));
-        axios
-          .put(`http://127.0.0.1:8000/api/task-detail-view/${update_task.id}/`, task)
+        apiInstance
+          .put(`task-detail-view/${update_task.id}/`, task)
           .then((response) => {
             const resData = response.data;
             const changedData= tasks.map((item) => {

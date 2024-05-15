@@ -3,10 +3,9 @@ import { ACCESS_TOKEN } from './constant';
 
 const apiInstance = axios.create({
     baseURL: 'https://to-do-list-qwra.onrender.com/api/',
-    timeout: 5000, // timeout after 5 seconds
     headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
     },
 });
 

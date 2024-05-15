@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserTask } from '../../../state/features/userTasks';
 import styled from 'styled-components';
+import apiInstance from '../../../common/baseUrl';
 function AddTaskForm({user}) {
     const dispatch = useDispatch()
     const [task, setTask] = useState({
@@ -31,10 +32,9 @@ function AddTaskForm({user}) {
       if (task.task != ""){
 
      
-    axios
-      .post("http://127.0.0.1:8000/api/task-view/", task)
+    apiInstance
+      .post("task-view/", task)
       .then(function (response) {
-        console.log(response);
         dispatch(addUserTask(response.data));
         setTask((prev) => ({ ...prev, isChecked: false, task: "" }));
       })
