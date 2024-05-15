@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.http.response import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -25,13 +25,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 import logging
 from rest_framework import viewsets, generics
-
+from django.views.generic import TemplateView
+from django.views.decorators.cache import never_cache
 from .serializers import UserSerializer, UserCreateSerializer, UserLoginSerializer, TaskSerializer
 from .models import Users , Task
+import os
+from django.views import View
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
+BASE_DIR = Path(__file__).resolve().parent.parent
+print(BASE_DIR)
 
 
+def index(request):
+    return render(request, 'index.html')
+ 
 class UsersView(generics.ListAPIView):
     serializer_class = UserSerializer
     queryset = Users.objects.all()

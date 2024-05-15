@@ -20,7 +20,8 @@ from django.views.generic import TemplateView
 
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
-
+from django.conf import settings
+from django.views.static import serve
 
 
 
@@ -31,9 +32,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/token/verify/', TokenVerifyView.as_view()),
     path('admin/', admin.site.urls),
-    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
-
-    path("", include("django.contrib.auth.urls"))
+    path("", include("django.contrib.auth.urls")),
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root':settings.MEDIA_ROOT}), 
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root':settings.STATIC_ROOT}), 
    
 ]
 

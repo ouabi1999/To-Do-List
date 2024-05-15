@@ -1,8 +1,12 @@
-from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.urls import path, include
+
 from .views import (UsersDetail,
-                    UsersList, TaskView,
+                    UsersList, TaskView, index,
                     TaskDetailView,
-                    RegisterView, LoginView,LogoutView, PasswordResetView, UserTasksView, ProfileView)
+                    RegisterView, LoginView,LogoutView, PasswordResetView, UserTasksView, ProfileView, )
 
 urlpatterns = [
     
@@ -19,7 +23,7 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     
     path('password-reset/', PasswordResetView.as_view(), name='password-reset'),
-
+    path('', index, name='HomePageView')
     #path('register/', RegisterView.as_view()),
     #path('auth/', RetrieveUserView.as_view()),
     #path('login/', LoginView.as_view()),
