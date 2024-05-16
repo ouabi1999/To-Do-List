@@ -15,6 +15,7 @@ import Login from "./components/authantication/Login"
 import { setAuth } from './state/features/authentication';
 import apiInstance from './common/baseUrl';
 import { useDispatch } from 'react-redux';
+import NotFound from './common/NotFound';
 function App() {
   const [user, setUser] = useState("")
   const dispatch = useDispatch()
@@ -49,6 +50,7 @@ function App() {
         <Route path="/" element={<Index/>}/>
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="*" element={ <NotFound/>}/>
       </Routes>
       </BrowserRouter>
     </>

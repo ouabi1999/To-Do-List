@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from uuid import uuid4
 
 def get_uuid():
-    return uuid4()
+    return uuid4().hex
 
 # Create your models here.
 class UserAccountManager(BaseUserManager):
